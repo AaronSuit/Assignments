@@ -1,0 +1,44 @@
+def calcstats(nums):
+
+    try:
+        for x in nums:
+            x = float(x)
+            
+    except:
+        
+        return "Error"
+    
+    
+    
+    sum = 0
+    elements = 0
+    deviation = 0
+    
+    for x in nums:
+        x = float(x)
+        sum = sum + x
+        elements= elements + 1
+    
+    mean = sum / elements 
+    devtotal= 0
+    for x in nums:
+        x= float(x)
+        x = x - mean
+        x = x * x
+        
+        devtotal = devtotal + x
+    
+    elements= elements - 1
+    devtotal = devtotal/elements
+    devtotal = devtotal ** 0.5
+        
+    return sum, mean, devtotal    
+
+
+
+
+
+
+test1=[3,"2",2,5,1]
+
+print(calcstats(test1))
