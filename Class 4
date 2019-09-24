@@ -1,0 +1,102 @@
+In [1]:
+
+
+
+
+mydictionary = {"George": 44, "Lyndy": 12, "Daria": 15, "Scott": 19}
+mydictionary["George"]
+​
+#The string "George" is refered to as the key while the number 44 is refered to as the "value" assigned to that key
+
+
+Out[1]:
+44
+In [2]:
+
+
+mydictionary.keys()
+
+
+Out[2]:
+dict_keys(['George', 'Lyndy', 'Daria', 'Scott'])
+In [6]:
+
+
+for item in mydictionary:
+    print(item,mydictionary[item])
+
+
+
+George 44
+Lyndy 12
+Daria 15
+Scott 19
+In [10]:
+
+
+mydictionary["Bryce"] = 17
+for item in mydictionary:
+    print(item, mydictionary[item])
+
+
+
+George 44
+Lyndy 12
+Daria 15
+Scott 19
+Bryce 17
+In [11]:
+
+
+mydictionary
+
+
+Out[11]:
+{'George': 44, 'Lyndy': 12, 'Daria': 15, 'Scott': 19, 'Bryce': 17}
+In [13]:
+
+
+#Creating a class is essentially creating a custom data type
+#object is an entity that has a specific class
+
+
+
+  File "<ipython-input-13-aa1d880b2c8c>", line 2
+    mydictionary2
+                ^
+SyntaxError: invalid syntax
+
+
+In [15]:
+
+
+myname = "Jake"
+myname.upper()
+
+
+Out[15]:
+'JAKE'
+In [16]:
+
+
+myname.split("a")
+
+
+Out[16]:
+['J', 'ke']
+In [17]:
+
+
+type(myname)
+
+
+Out[17]:
+str
+In [18]:
+
+
+myname
+
+
+Out[18]:
+'Jake'
