@@ -1,0 +1,13 @@
+import arcpy
+
+dataset1 = GetParameterAsText(0)
+distance1 = GetParameterAsText(1)
+output1 = r"in_memory\output1"
+dataset2 = GetParameterAsText(2)
+distance2 = GetParameterAsText(3)
+output2 = r"in_memory\output2"
+output3 = GetParameterAsText(4)
+
+arcpy.Buffer_analysis(dataset1, output1, distance1)
+arcpy.Buffer_analysis(dataset2, output2, distance2)
+arcpy.Intersect_analysis([output1, output2], output3)
