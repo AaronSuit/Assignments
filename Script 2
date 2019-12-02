@@ -28,14 +28,13 @@ meansum2 = 0
 for entry in valuelist:
     entry = (entry - mean)**2
     meansum2 = meansum2 + entry
-mean2 = meansum2 / meannum
-print(mean2)    
-stddev = mean2**(1/2.0)
+   
+mean2 = meansum2 / meannum    
+stddev = mean2**(1/2)
 
 
-print(valuelist)
 print("The mean of the field's values is: {0}".format(mean))
-print("The standard deviation of the field's values is: {0}".format(stddev))
+print("The standard deviation of the field's values is: {0} ".format(stddev))
 
 
 def createHisto(featureclass, field):
@@ -44,7 +43,7 @@ def createHisto(featureclass, field):
     meannum = 0
     for value in arcpy.da.SearchCursor(featureclass, field):
         valuelist.append(value)
-    n, bins, patches = plt.hist(valuelist, 3, facecolor='blue', alpha=0.5)
+    n, bins, patches = plt.hist(valuelist, 6, facecolor='blue', alpha=0.5, density=0, histtype='barstacked')
     plt.xlabel(histo_field)
     plt.ylabel('Frequency')
     plt.title(r'Histogram of : {0}'.format(histo_field))
@@ -52,3 +51,4 @@ def createHisto(featureclass, field):
     return
 
 createHisto(fc,histo_field)
+
