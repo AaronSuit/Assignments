@@ -23,12 +23,15 @@ for entry in valuelist:
         
 mean = meansum / meannum 
 meansum2 = 0
-mean2 = meansum2 / meannum
+
 
 for entry in valuelist:
     entry = (entry - mean)**2
     meansum2 = meansum2 + entry
-stddev = meansum2**(1/2.0)
+mean2 = meansum2 / meannum
+print(mean2)    
+stddev = mean2**(1/2.0)
+
 
 print(valuelist)
 print("The mean of the field's values is: {0}".format(mean))
