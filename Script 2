@@ -1,7 +1,3 @@
-#Setup nessessary libraries.  
-#You will need to add some more based on how you will read the feature class you will use
-#probably either arcpy or ArcGIS api for Python and Pandas
-
 %matplotlib inline
 import arcpy
 import matplotlib
@@ -9,62 +5,47 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-
-
-
-
-# Delete the cell above, but include the logic to build the same kind of data from one 
-# column in a feature class.
-
-#Specify which feature class you will use here (path)
 fc = r"C:\Users\w935558\Desktop\Final\FinalData\FinalData.gdb\Question2Features"
 
-#Specify which Column you will use here.
 histo_field = "Elevation"
 
-
-# Below here add the logic that will build a sequence of all the values
-# in one column (field) of a feature class.  Then delete the cell above this.  
-# if you name the variable that stores the sequence "x" you should not have to change
-# of the code below this point.
 valuelist = []
-for value in arcpy.da.SearchCursor(fc, histo_field):
-    valuelist.append(value)
-    
-print(valuelist)
+meansum = 0
+meannum = 0
+sumtotal = 0
 
+for value in arcpy.da.SearchCursor(fc, histo_field):
+    valuelist.append(value[0])
+    
+for entry in valuelist:
+        meansum = meansum + entry
+        meannum = meannum + 1
+        
+mean = meansum / meannum 
+meansum2 = 0
+mean2 = meansum2 / meannum
+
+for entry in valuelist:
+    entry = (entry - mean)**2
+    meansum2 = meansum2 + entry
+stddev = meansum2**(1/2.0)
+
+print(valuelist)
+print("The mean of the field's values is: {0}".format(mean))
+print("The standard deviation of the field's values is: {0}".format(stddev))
 
 
 def createHisto(featureclass, field):
     valuelist = []
-    #meansum = 0
-    #numberofvalues = 0
+    meansum = 0
+    meannum = 0
     for value in arcpy.da.SearchCursor(featureclass, field):
         valuelist.append(value)
-        #meansum = meansum + value
-        #numberofvalues = numberofvalues + 1
-    n, bins, patches = plt.hist(valuelist, 10, facecolor='blue', alpha=0.5)
+    n, bins, patches = plt.hist(valuelist, 3, facecolor='blue', alpha=0.5)
     plt.xlabel(histo_field)
     plt.ylabel('Frequency')
     plt.title(r'Histogram of : {0}'.format(histo_field))
-    plt.subplots_adjust(left=0.15)
-    #mean = meansum / numberofvalues
-    #print(mean)
+    plt.subplots_adjust(left=0.15) 
     return
 
-#This is the number of bins your histogram will have.  
-#You may want to change this so keep it near this comment.
-#num_bins = 20
-
 createHisto(fc,histo_field)
-# the histogram of the data
-#n, bins, patches = plt.hist(valuelist, num_bins, facecolor='blue', alpha=0.5)
-#axes = plt.axes()
-#axes.set_ylim([0, 1.25])
-#axes.set_xlim([-86, -75])
-#plt.xlabel(histo_field)
-#plt.ylabel('Frequency')
-#plt.title(r'Histogram of : {0}'.format(histo_field))
-
-# Tweak spacing to prevent clipping of ylabel
-#plt.subplots_adjust(left=0.15)
