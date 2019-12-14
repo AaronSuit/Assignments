@@ -1,0 +1,22 @@
+import arcpy
+
+Object = r"C:\Users\w935558.USM\Desktop\finalproject\Hospitals\Hospitals.shp"
+
+Near = r"C:\Users\w935558.USM\Desktop\finalproject\Public_Schools\Public_Schools.shp"
+
+def findthenearest (x,y):
+    under10list = []
+    over10list = []
+    arcpy.Near_analysis(x,y, 'Kilometers','NO_LOCATION','NO_ANGLE','GEODESIC')
+    for entry in arcpy.da.SearchCursor(x, ['NEAR_DIST']):
+        if entry[0] < 10000:
+            under10list.append(entry[0])
+        if entry[0] > 10000:
+            over10list.append(entry[0])
+            
+    print('There are this many of x within 10,000 Kilometers of a y:  ', len(under10list))
+    print('There are this many of x beyond 10,000 Kilometers of a y:  ', len(over10list))
+    
+    return
+findthenearest(Near,Object)
+    
